@@ -8,39 +8,36 @@ import LoginPage from '../Page/LoginPage';
 import ProductAddPage from '../Page/ProductAddPage';
 import CartsPage from '../Page/CartsPage';
 
-export default function getRouter() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <App />,
-      errorElement: <NotFoundPage />,
-      children: [
-        {
-          index: true,
-          element: <HomePage />
-        },
-        {
-          path: '/products',
-          element: <ProductsPage />
-        },
-        {
-          path: '/products/:productId',
-          element: <ProductDetailPage />
-        },
-        {
-          path: '/login',
-          element: <LoginPage />
-        },
-        {
-          path: '/products/add',
-          element: <ProductAddPage />
-        },
-        {
-          path: '/carts/',
-          element: <CartsPage />
-        }
-      ],
-    }
-  ]);
-  return router;
-}
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    errorElement: <NotFoundPage />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
+      {
+        path: '/products',
+        element: <ProductsPage />
+      },
+      {
+        path: '/products/:productId',
+        element: <ProductDetailPage />
+      },
+      {
+        path: '/login',
+        element: <LoginPage />
+      },
+      {
+        path: '/products/add',
+        element: <ProductAddPage />
+      },
+      {
+        path: '/carts/',
+        element: <CartsPage />
+      }
+    ],
+  }
+]);
