@@ -1,6 +1,10 @@
-import { createContext, useContext, useEffect } from 'react';
-import { useState } from 'react';
-import { loginByGoogle, logoutByGoogle, onUserStateChange } from '../auth/googleAuthProvider';
+import { createContext, useContext, useEffect } from "react";
+import { useState } from "react";
+import {
+  loginByGoogle,
+  logoutByGoogle,
+  onUserStateChange,
+} from "../auth/googleAuthProvider";
 
 const UserContext = createContext();
 
@@ -17,9 +21,13 @@ export function UserContextProvider({ children }) {
   const isLogin = user !== null;
   const isAuthInfoLoading = user === undefined;
   useEffect(() => onUserStateChange(setUser), []);
-  return <UserContext.Provider value={{ user, isLogin, login, logout, isAuthInfoLoading }}>
-    {children}
-  </UserContext.Provider>
+  return (
+    <UserContext.Provider
+      value={{ user, isLogin, login, logout, isAuthInfoLoading }}
+    >
+      {children}
+    </UserContext.Provider>
+  );
 }
 
 export const useUserContext = () => useContext(UserContext);
