@@ -7,8 +7,6 @@ const auth = getAuth();
 export async function loginByGoogle() {
   const user = await signInWithPopup(auth, provider)
     .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
       const user = result.user;
       return user;
     }).catch((err) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./Logo";
-import NavBar from "./NavBar";
+import NavBar from "./navbar/NavBar";
 
 export default function Header() {
   return (
