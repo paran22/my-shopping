@@ -6,6 +6,7 @@ import ProductsPage from '../Page/ProductsPage';
 import ProductDetailPage from '../Page/ProductDetailPage';
 import LoginPage from '../Page/LoginPage';
 import ProductAddPage from '../Page/ProductAddPage';
+import CartsPage from '../Page/CartsPage';
 
 export default function getRouter() {
   const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export default function getRouter() {
         {
           path: '/products/add',
           element: <ProductAddPage />
+        },
+        {
+          path: '/carts/',
+          element: <CartsPage />
         }
       ],
     }
