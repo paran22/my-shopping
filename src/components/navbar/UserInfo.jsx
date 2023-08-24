@@ -8,7 +8,7 @@ export default function UserInfo() {
       {isLogin && (
         <div className="flex gap-1 items-center">
           <img
-            className="w-8 h-8 min-w-min rounded-full"
+            className="w-8 h-8 shrink-0 rounded-full"
             src={user.photoURL}
             alt={user.displayName}
           />
