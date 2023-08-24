@@ -10,15 +10,14 @@ export function AuthContextProvider({ children }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const isLogin = user !== null;
   const isAuthInfoLoading = user === undefined;
-  const isAdminUser = async () => {
-    const list = await getAdminList();
-    setIsAdmin(list.includes(user.uid));
-  };
   useEffect(
     () =>
       onUserStateChange(async (user) => {
         setUser(user);
-        if (user) await isAdminUser(user);
+        if (user) {
+          const isAdmin = await isAdminUser(user);
+          setIsAdmin(isAdmin);
+        }
       }),
     []
   );
@@ -27,6 +26,11 @@ export function AuthContextProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
+}
+
+async function isAdminUser(user) {
+  const list = await getAdminList();
+  return list.includes(user.uid);
 }
 
 export const useAuthContext = () => useContext(AuthContext);
