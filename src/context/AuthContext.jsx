@@ -3,9 +3,9 @@ import { useState } from "react";
 import { getAdminList } from "../api/api";
 import { onUserStateChange } from "../auth/googleAuthProvider";
 
-const UserContext = createContext();
+const AuthContext = createContext();
 
-export function UserContextProvider({ children }) {
+export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(undefined);
   const [isAdmin, setIsAdmin] = useState(false);
   const isLogin = user !== null;
@@ -23,10 +23,10 @@ export function UserContextProvider({ children }) {
     []
   );
   return (
-    <UserContext.Provider value={{ user, isLogin, isAuthInfoLoading, isAdmin }}>
+    <AuthContext.Provider value={{ user, isLogin, isAuthInfoLoading, isAdmin }}>
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export const useUserContext = () => useContext(UserContext);
+export const useAuthContext = () => useContext(AuthContext);

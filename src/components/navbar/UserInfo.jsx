@@ -1,8 +1,8 @@
 import React from "react";
-import { useUserContext } from "../../context/UserContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 export default function UserInfo() {
-  const { user, isLogin } = useUserContext();
+  const { user, isLogin } = useAuthContext();
   return (
     <>
       {isLogin && (

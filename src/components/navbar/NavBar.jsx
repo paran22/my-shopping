@@ -3,12 +3,12 @@ import { useNavigate } from "react-router";
 import { BsCart2, BsFillPencilFill } from "react-icons/bs";
 import { NavIconItem, NavTextItem } from "./NavItem";
 import UserInfo from "./UserInfo";
-import { useUserContext } from "../../context/UserContext";
+import { useAuthContext } from "../../context/AuthContext";
 import { loginByGoogle, logoutByGoogle } from "../../auth/googleAuthProvider";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const { isAuthInfoLoading, isLogin, isAdmin } = useUserContext();
+  const { isAuthInfoLoading, isLogin, isAdmin } = useAuthContext();
   const navigateProductsPage = () => navigate("/products");
   const navigateCartsPage = () => navigate("/carts");
   const navigateProductAddPage = () => navigate("/products/add");

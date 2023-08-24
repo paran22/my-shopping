@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router';
 import Header from './components/Header';
-import { UserContextProvider } from './context/UserContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 
 function App() {
   return (
     <div>
-      <UserContextProvider>
+      <AuthContextProvider>
         <Header />
-      </UserContextProvider>
+      </AuthContextProvider>
       <Outlet />
     </div>
   );
