@@ -8,12 +8,13 @@ import { loginByGoogle, logoutByGoogle } from "../../auth/googleAuthProvider";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const { isAuthInfoLoading, isLogin } = useUserContext();
+  const { isAuthInfoLoading, isLogin, isAdmin } = useUserContext();
   const navigateProductsPage = () => navigate("/products");
   const navigateCartsPage = () => navigate("/carts");
   const navigateProductAddPage = () => navigate("/products/add");
   const cartsIcon = <BsCart2 />;
   const addIcon = <BsFillPencilFill />;
+  console.log(isAdmin);
   return (
     <>
       {!isAuthInfoLoading && (
@@ -22,7 +23,9 @@ export default function NavBar() {
             <NavTextItem name="Products" onClick={navigateProductsPage} />
           </div>
           <NavIconItem icon={cartsIcon} onClick={navigateCartsPage} />
-          <NavIconItem icon={addIcon} onClick={navigateProductAddPage} />
+          {isAdmin && (
+            <NavIconItem icon={addIcon} onClick={navigateProductAddPage} />
+          )}
           <UserInfo />
           <NavTextItem
             name={isLogin ? "Logout" : "Login"}
