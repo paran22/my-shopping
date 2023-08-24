@@ -4,10 +4,11 @@ import { BsCart2, BsFillPencilFill } from "react-icons/bs";
 import { NavIconItem, NavTextItem } from "./NavItem";
 import UserInfo from "./UserInfo";
 import { useUserContext } from "../../context/UserContext";
+import { loginByGoogle, logoutByGoogle } from "../../auth/googleAuthProvider";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const { isAuthInfoLoading, isLogin, login, logout } = useUserContext();
+  const { isAuthInfoLoading, isLogin } = useUserContext();
   const navigateProductsPage = () => navigate("/products");
   const navigateCartsPage = () => navigate("/carts");
   const navigateProductAddPage = () => navigate("/products/add");
@@ -23,7 +24,7 @@ export default function NavBar() {
           <UserInfo />
           <NavTextItem
             name={isLogin ? "Logout" : "Login"}
-            onClick={isLogin ? logout : login}
+            onClick={isLogin ? logoutByGoogle : loginByGoogle}
           />
         </div>
       )}
