@@ -7,6 +7,7 @@ import ProductDetailPage from '../Page/ProductDetailPage';
 import LoginPage from '../Page/LoginPage';
 import ProductAddPage from '../Page/ProductAddPage';
 import CartsPage from '../Page/CartsPage';
+import ProtectedRoute from '../Page/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -32,11 +33,14 @@ export const router = createBrowserRouter([
       },
       {
         path: '/products/add',
-        element: <ProductAddPage />
+        element:
+          <ProtectedRoute requiredAdmin={true}>
+            <ProductAddPage />
+          </ProtectedRoute>
       },
       {
         path: '/carts/',
-        element: <CartsPage />
+        element: <ProtectedRoute><CartsPage /></ProtectedRoute>
       }
     ],
   }

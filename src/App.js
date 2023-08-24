@@ -8,8 +8,8 @@ function App() {
     <div>
       <AuthContextProvider>
         <Header />
+        <Outlet />
       </AuthContextProvider>
-      <Outlet />
     </div>
   );
 }
