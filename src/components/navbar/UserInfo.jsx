@@ -6,13 +6,13 @@ export default function UserInfo() {
   return (
     <>
       {isLogin && (
-        <div className="flex gap-1 items-center font-semibold">
+        <div className="flex gap-1 items-center">
           <img
-            className="w-8 h-8 rounded-full"
+            className="w-8 h-8 min-w-min rounded-full"
             src={user.photoURL}
             alt={user.displayName}
           />
-          <p>{user.displayName}</p>
+          <p className="hidden sm:block font-semibold">{user.displayName}</p>
         </div>
       )}
     </>

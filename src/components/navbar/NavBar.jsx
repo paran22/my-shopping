@@ -18,7 +18,9 @@ export default function NavBar() {
     <>
       {!isAuthInfoLoading && (
         <div className="flex gap-2 items-center">
-          <NavTextItem name="Products" onClick={navigateProductsPage} />
+          <div className="hidden sm:block">
+            <NavTextItem name="Products" onClick={navigateProductsPage} />
+          </div>
           <NavIconItem icon={cartsIcon} onClick={navigateCartsPage} />
           <NavIconItem icon={addIcon} onClick={navigateProductAddPage} />
           <UserInfo />
