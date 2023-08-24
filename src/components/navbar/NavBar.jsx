@@ -14,7 +14,6 @@ export default function NavBar() {
   const navigateProductAddPage = () => navigate("/products/add");
   const cartsIcon = <BsCart2 />;
   const addIcon = <BsFillPencilFill />;
-  console.log(isAdmin);
   return (
     <>
       {!isAuthInfoLoading && (
@@ -22,7 +21,9 @@ export default function NavBar() {
           <div className="hidden sm:block">
             <NavTextItem name="Products" onClick={navigateProductsPage} />
           </div>
-          <NavIconItem icon={cartsIcon} onClick={navigateCartsPage} />
+          {isLogin && (
+            <NavIconItem icon={cartsIcon} onClick={navigateCartsPage} />
+          )}
           {isAdmin && (
             <NavIconItem icon={addIcon} onClick={navigateProductAddPage} />
           )}
