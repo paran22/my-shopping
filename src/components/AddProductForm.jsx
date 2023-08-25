@@ -4,6 +4,9 @@ import { saveProduct, uploadImage } from "../api/api";
 export default function AddProductForm() {
   const [product, setProduct] = useState({});
   const [file, setFile] = useState();
+  const [isUploading, setIsUploading] = useState(false);
+  const [resultMsg, setResultMsg] = useState(null);
+
   const onChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "file") {
@@ -13,17 +16,26 @@ export default function AddProductForm() {
     setProduct((product) => ({ ...product, [name]: value }));
   };
   const addProduct = async (e) => {
+    setIsUploading(true);
     e.preventDefault();
     if (!file) return;
     const imageUrl = await uploadImage(file);
-    await saveProduct(product, imageUrl);
+    const success = await saveProduct(product, imageUrl);
+    setResultMsg(
+      success ? "성공적으로 등록되었습니다." : "에러가 발생하였습니다"
+    );
+    setTimeout(() => {
+      setResultMsg(null);
+    }, 2000);
+    setIsUploading(false);
   };
   const inputStyle = "border px-2 py-1";
   return (
     <section className="flex flex-col gap-3 items-center my-4">
       <span className="font-bold">새로운 제품 등록</span>
+      {resultMsg && <p className="font-semibold">{resultMsg}</p>}
       {file && (
-        <img className="w-3/5" src={URL.createObjectURL(file)} alt="file" />
+        <img className="w-2/5" src={URL.createObjectURL(file)} alt="file" />
       )}
       <form className="flex flex-col gap-2" onSubmit={addProduct}>
         <input
@@ -74,7 +86,9 @@ export default function AddProductForm() {
           placeholder="옵션들(콤마(,)로 구분"
           name="options"
         ></input>
-        <button className="border bg-primary px-2 py-1">제품 등록하기</button>
+        <button className="border bg-primary px-2 py-1" disabled={isUploading}>
+          {isUploading ? "업로드 중 ..." : "제품 등록하기"}
+        </button>
       </form>
     </section>
   );

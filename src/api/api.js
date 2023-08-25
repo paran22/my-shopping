@@ -26,7 +26,7 @@ export async function uploadImage(file) {
 export async function saveProduct(product, imageUrl) {
   const key = 'products'
   const id = uuid();
-  set(ref(db, `${key + '/' + id}`), {
+  return set(ref(db, `${key + '/' + id}`), {
     ...product, imageUrl, id, price: parseInt(product.price), options: product.options.split(','),
-  });
+  }).then(() => true).catch(() => false);
 }
