@@ -5,6 +5,7 @@ import uuid from 'react-uuid'
 const db = getDatabase(app);
 const productsDbKey = 'products'
 const adminsDbKey = 'admins';
+const cartsDbKey = 'carts';
 
 export async function getAdmins() {
   const admins = await get(ref(db, adminsDbKey));
@@ -14,7 +15,17 @@ export async function getAdmins() {
 export async function getProducts() {
   const products = await get(ref(db, productsDbKey));
   return Object.values(products.val());
+}
 
+export async function addToCarts(product, selectedOption) {
+  const id = uuid();
+  const count = 1;
+  console.log(product);
+  return set(ref(db, `${cartsDbKey + '/' + id}`), {
+    ...product,
+    selectedOption,
+    count,
+  }).then(() => true).catch(() => false);
 }
 
 export async function uploadImage(file) {
