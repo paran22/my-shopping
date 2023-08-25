@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import AddProductForm from "../components/AddProductForm";
 
 export default function ProductAddPage() {
-  return <div>AddProductPage</div>;
+  const [product, setProduct] = useState();
+  // const { imgUrl } = product;
+  return (
+    <div>
+      <AddProductForm />
+    </div>
+  );
 }
