@@ -13,7 +13,7 @@ export async function getAdmins() {
 
 export async function getProducts() {
   const products = await get(ref(db, productsDbKey));
-  return products.val();
+  return Object.values(products.val());
 
 }
 
