@@ -19,6 +19,7 @@ export default function ProductDetail() {
       ? "장바구니에 담겼습니다."
       : "에러가 발생했습니다.";
     setResultMsg(resultMsg);
+    setIsUploading(false);
     setTimeout(() => setResultMsg(null), 2000);
   };
   return (
