@@ -1,5 +1,12 @@
 import React from "react";
+import Banner from "../components/Banner";
+import ProductList from "../components/ProductList";
 
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <section className="py-4 px-6">
+      <Banner />
+      <ProductList />
+    </section>
+  );
 }
