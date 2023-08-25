@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router";
-import { addToCarts } from "../api/api";
+import { addAndUpdateCarts } from "../api/api";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function ProductDetail() {
   const location = useLocation();
   const product = location.state.product;
-  const { id, title, description, price, image, options } = product;
+  const { title, description, price, image, options } = product;
   const [selected, setSelected] = useState(options && options[0]);
   const [isUploading, setIsUploading] = useState(false);
   const [resultMsg, setResultMsg] = useState();
   const selectOption = (e) => setSelected(e.target.value);
+  const { user } = useAuthContext();
   const addCarts = async () => {
     setIsUploading(true);
-    const success = addToCarts(product, selected);
+    const success = addAndUpdateCarts(product, selected, user.uid, 1);
     const resultMsg = success
       ? "장바구니에 담겼습니다."
       : "에러가 발생했습니다.";

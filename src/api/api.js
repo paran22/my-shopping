@@ -1,4 +1,4 @@
-import { getDatabase, get, ref, set } from 'firebase/database';
+import { getDatabase, get, ref, set, remove } from 'firebase/database';
 import { app } from '../firebaseConfig';
 import uuid from 'react-uuid'
 
@@ -17,15 +17,21 @@ export async function getProducts() {
   return Object.values(products.val());
 }
 
-export async function addToCarts(product, selectedOption) {
-  const id = uuid();
-  const count = 1;
-  console.log(product);
-  return set(ref(db, `${cartsDbKey + '/' + id}`), {
+export async function addAndUpdateCarts(product, selectedOption, userId, count) {
+  return set(ref(db, `${cartsDbKey}/${userId}//${product.id}`), {
     ...product,
     selectedOption,
     count,
   }).then(() => true).catch(() => false);
+}
+
+export async function getCarts(userId) {
+  const carts = await get(ref(db, `${cartsDbKey}/${userId}`));
+  return Object.values(carts.val());
+}
+
+export async function removeFromCart(productId, userId) {
+  return remove(remove(ref(db, `${cartsDbKey}/${userId}//${productId}`))).then(() => true).catch(() => false);;
 }
 
 export async function uploadImage(file) {
