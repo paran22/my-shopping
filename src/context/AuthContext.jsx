@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
-import { getAdminList } from "../api/api";
+import { getAdmins } from "../api/api";
 import { onUserStateChange } from "../auth/googleAuthProvider";
 
 const AuthContext = createContext();
@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }) {
 }
 
 async function isAdminUser(user) {
-  const list = await getAdminList();
+  const list = await getAdmins();
   return list.includes(user.uid);
 }
 
