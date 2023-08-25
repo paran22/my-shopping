@@ -3,11 +3,18 @@ import { app } from '../firebaseConfig';
 import uuid from 'react-uuid'
 
 const db = getDatabase(app);
+const productsDbKey = 'products'
+const adminsDbKey = 'admins';
 
-export async function getAdminList() {
-  const key = 'admins';
-  const adminList = await get(ref(db, key));
-  return adminList.val();
+export async function getAdmins() {
+  const admins = await get(ref(db, adminsDbKey));
+  return admins.val();
+}
+
+export async function getProducts() {
+  const products = await get(ref(db, productsDbKey));
+  return products.val();
+
 }
 
 export async function uploadImage(file) {
@@ -24,9 +31,8 @@ export async function uploadImage(file) {
 }
 
 export async function saveProduct(product, imageUrl) {
-  const key = 'products'
   const id = uuid();
-  return set(ref(db, `${key + '/' + id}`), {
+  return set(ref(db, `${productsDbKey + '/' + id}`), {
     ...product, imageUrl, id, price: parseInt(product.price), options: product.options.split(','),
   }).then(() => true).catch(() => false);
 }
