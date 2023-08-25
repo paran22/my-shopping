@@ -19,7 +19,7 @@ export async function getProducts() {
 
 export async function addAndUpdateCarts(product, selectedOption, userId, count) {
   return set(ref(db, `${cartsDbKey}/${userId}//${product.id}`), {
-    ...product,
+    product,
     selectedOption,
     count,
   }).then(() => true).catch(() => false);
