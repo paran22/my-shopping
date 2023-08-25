@@ -5,7 +5,12 @@ import { useNavigate } from "react-router";
 export default function ProductCard({ product }) {
   const { category, title, id, image, price } = product;
   const navigate = useNavigate();
-  const navigateDetail = () => navigate(`/products/${id}`);
+  const navigateDetail = () =>
+    navigate(`/products/${id}`, {
+      state: {
+        product: product,
+      },
+    });
   return (
     <li className="flex flex-col cursor-pointer" onClick={navigateDetail}>
       <img className="rounded-lg" src={image} alt={title} />
