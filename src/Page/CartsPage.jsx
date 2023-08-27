@@ -31,9 +31,9 @@ export default function CartsPage() {
       </ul>
       <div className="flex justify-between items-center">
         <PriceCard text="상품 총액" price={totalPrice} />
-        <BsFillPlusCircleFill />
+        <BsFillPlusCircleFill className="shrink-0" />
         <PriceCard text="배송액" price={SHIPPING} />
-        <FaEquals />
+        <FaEquals className="shrink-0" />
         <PriceCard text="총액" price={SHIPPING + totalPrice} />
       </div>
     </section>
