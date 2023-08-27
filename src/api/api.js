@@ -12,7 +12,7 @@ export async function getAdmins() {
   return admins.val();
 }
 
-export async function getProducts() {
+export async function getProductsApi() {
   const products = await get(ref(db, productsDbKey));
   return Object.values(products.val());
 }
@@ -49,7 +49,13 @@ export async function uploadImage(file) {
 
 export async function saveProduct(product, imageUrl) {
   const id = uuid();
-  return set(ref(db, `${productsDbKey + '/' + id}`), {
-    ...product, imageUrl, id, price: parseInt(product.price), options: product.options.split(','),
-  }).then(() => true).catch(() => false);
+  return set(ref(db, `${productsDbKey + "/" + id}`), {
+    ...product,
+    imageUrl,
+    id,
+    price: parseInt(product.price),
+    options: product.options.split(","),
+  })
+    .then(() => true)
+    .catch(() => false);
 }

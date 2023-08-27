@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { saveProduct, uploadImage } from "../api/api";
+import { uploadImage } from "../api/api";
+import useProducts from "../hooks/useProducts";
 
 export default function AddProductForm() {
   const [product, setProduct] = useState({});
@@ -15,15 +16,17 @@ export default function AddProductForm() {
     }
     setProduct((product) => ({ ...product, [name]: value }));
   };
-  const addProduct = async (e) => {
+  const { addProduct } = useProducts();
+
+  const onSubmit = async (e) => {
     setIsUploading(true);
     e.preventDefault();
     if (!file) return;
     const imageUrl = await uploadImage(file);
-    const success = await saveProduct(product, imageUrl);
-    setResultMsg(
-      success ? "성공적으로 등록되었습니다." : "에러가 발생하였습니다"
-    );
+    addProduct.mutate({ product, imageUrl }, {
+      onSuccess: () => setResultMsg("성공적으로 등록되었습니다."),
+      onError: () => setResultMsg("에러가 발생했습니다."),
+    })
     setTimeout(() => {
       setResultMsg(null);
     }, 2000);
@@ -37,7 +40,7 @@ export default function AddProductForm() {
       {file && (
         <img className="w-2/5" src={URL.createObjectURL(file)} alt="file" />
       )}
-      <form className="flex flex-col gap-2" onSubmit={addProduct}>
+      <form className="flex flex-col gap-2" onSubmit={onSubmit}>
         <input
           className={inputStyle}
           type="file"
